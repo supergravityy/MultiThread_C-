@@ -79,7 +79,10 @@ int main()
 	thread deposit(Do_deposit, ref(Myaccount), amountD, numD);
 	thread withdraw(Do_withdraw, ref(Myaccount), amountW, numW);
 
-	// 
+	/* ref를 쓰는 이유 
+	thread 클래스의 생성자가 기본적으로 인자를 내부적으로 튜플에 저장하여, 인자들을 복사하기 때문
+	그래서 ref를 사용하여 참조의 ref를 만들어 넘겨주면 원본객체에 대한 참조를 유지가능 */
+	
 
 	cout << "최종값 : " << Myaccount.print() << endl;
 
