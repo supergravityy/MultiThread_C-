@@ -46,11 +46,11 @@ void Do_deposit(BankAccount &account ,int amount, int num)
 {
 	for (int i = 0; i < num; i++)
 	{
-		//mtx.lock();
+		mtx.lock();
 
 		account.Deposit(amount);
 
-		//mtx.unlock();
+		mtx.unlock();
 	}
 }
 
@@ -58,11 +58,11 @@ void Do_withdraw(BankAccount& account, int amount, int num)
 {
 	for (int i = 0; i < num; i++)
 	{
-		//mtx.lock();
+		mtx.lock();
 
 		account.Withdraw(amount);
 
-		//mtx.unlock();
+		mtx.unlock();
 	}
 }
 
@@ -76,8 +76,10 @@ int main()
 	int numW, amountW;
 	input_withdraw(&amountW, &numW);
 
-	thread deposit(Do_deposit, std::ref(Myaccount), amountD, numD);
-	thread withdraw(Do_withdraw, std::ref(Myaccount), amountW, numW);
+	thread deposit(Do_deposit, ref(Myaccount), amountD, numD);
+	thread withdraw(Do_withdraw, ref(Myaccount), amountW, numW);
+
+	// 
 
 	cout << "ÃÖÁ¾°ª : " << Myaccount.print() << endl;
 
